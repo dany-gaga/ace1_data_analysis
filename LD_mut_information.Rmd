@@ -1,0 +1,52 @@
+---
+title: "LD_mut_information_Notebook"
+output: LD_mut_informations
+---
+
+This is an [R Markdown](http://rmarkdown.rstudio.com) Notebook.
+
+```{r} 
+### load libraries
+library(ape)
+library(Biostrings)
+
+```
+
+```{r}
+### load the gff file and the reference sequence
+
+gff.path <- '/home/dany/Documents/renewp/Anopheles-gambiae-PEST_BASEFEATURES_AgamP4.12.gff3'
+gff <- read.gff(gff.path, GFF3 = T)
+
+genome.path <- '/home/dany/Documents/renewp/Anopheles-gambiae-PEST_CHROMOSOMES_AgamP4.fa'
+genome <- readDNAStringSet(genome.path)
+names(genome) <- sub(' .*', '', names(genome))
+```
+
+```{r}
+### extract the ace-1 gene information for the gff using its AGAP number (AGAP001356)
+
+ace1.gene.info <- extract.gene.info('AGAP001356', gff)
+```
+
+```{r}
+### load position of the SNPs of interest gotten from Python
+ace1.snps.of.interest <- c('2R:3484234', '2R:3484435', '2R:3484719', '2R:3484805', '2R:3485228', '2R:3485229', '2R:3485231',
+                           '2R:3485352', '2R:3485372', '2R:3485409', '2R:3485444', '2R:3485530', '2R:3485611', '2R:3485612',
+                           '2R:3485759', '2R:3485781', '2R:3486561', '2R:3486607', '2R:3486621', '2R:3486641', '2R:3486849',
+                           '2R:3486853', '2R:3486857', '2R:3487117', '2R:3487440', '2R:3487571', '2R:3487793', '2R:3487797',
+                           '2R:3487859', '2R:3487890', '2R:3487893', '2R:3488073', '2R:3488184', '2R:3488580', '2R:3488770',
+                           '2R:3489036', '2R:3489163', '2R:3489230', '2R:3489687', '2R:3490377', '2R:3490450', '2R:3490546',
+                           '2R:3490634', '2R:3490644', '2R:3490666', '2R:3490679', '2R:3490718', '2R:3490899', '2R:3490913',
+                           '2R:3491012', '2R:3491090', '2R:3491148', '2R:3491175', '2R:3491812', '2R:3492028', '2R:3492074',
+                           '2R:3492202', '2R:3492264', '2R:3492271', '2R:3492272', '2R:3492275', '2R:3492276', '2R:3492278',
+                           '2R:3492374', '2R:3493591', '2R:3493613', '2R:3493616', '2R:3493649', '2R:3493920', '2R:3493943',
+                           '2R:3494226', '2R:3494464', '2R:3495000', '2R:3495090', '2R:3495372', '2R:3495607', '2R:3495687')
+```
+
+```{r}
+### get information about te SNPs
+assess.SNPs(ace1.snps.of.interest, ace1.gene.info)
+```
+
+
