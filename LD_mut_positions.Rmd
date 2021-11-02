@@ -1,0 +1,31 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+```{r}
+### load library
+library(trackViewer)
+```
+
+```{r}
+### set SNPs position
+SNP <- c(3489230, 3491812, 3492028, 3492074, 3492202, 3492374)
+```
+
+```{r}
+### set exons and their range throughout the gene lenght
+ace1 <- GRanges("ace-1_gene", IRanges(SNP, width=1, names=paste0("snp", SNP)))
+features <- GRanges("ace-1_gene", IRanges(c(3489213, 3491491, 3491712, 3492329, 3492613, 3493387, 3493667), width=c(339, 134, 537, 197, 707, 172, 121),
+                                          names=paste0("exon", 1:7)))  
+```
+
+```{r}
+### plot the lolipop graph showing the SNPs and their location within their respective exons
+ace1$color <- sample.int(6, length(SNP), replace=TRUE)
+ace1$border <- sample(c("gray80", "gray30"), length(SNP), replace=TRUE)
+ace1$alpha <- sample(100:255, length(SNP), replace = TRUE)/255
+features$fill <- c("blue", "bisque2", "chartreuse", "coral2", "cyan", "darkolivegreen1", "darkviolet")
+lolliplot(ace1 , features)
+```
+
