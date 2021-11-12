@@ -1,5 +1,6 @@
 ---
 title: "R Notebook"
+author: "Helga Saizonou"
 output: html_notebook
 ---
 
@@ -24,7 +25,6 @@ features <- GRanges("ace-1_gene", IRanges(c(3489213, 3491491, 3491712, 3492329, 
 ### plot the lolipop graph showing the SNPs and their location within their respective exons
 ace1$color <- sample.int(6, length(SNP), replace=TRUE)
 ace1$border <- sample(c("gray80", "gray30"), length(SNP), replace=TRUE)
-ace1$alpha <- sample(100:255, length(SNP), replace = TRUE)/255
 features$fill <- c("blue", "bisque2", "chartreuse", "coral2", "cyan", "darkolivegreen1", "darkviolet")
 lolliplot(ace1 , features)
 ```
